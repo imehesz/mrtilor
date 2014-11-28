@@ -1,0 +1,13 @@
+.tile {
+  display:inline-block; 
+  margin:5px;
+  border: 1px dashed #aaa;
+}
+
+.title:hover {
+  cursor: pointer;
+}
+
+.tile.red {
+  border: 1px solid red;
+}
