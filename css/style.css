@@ -2,12 +2,22 @@
   display:inline-block; 
   margin:5px;
   border: 1px dashed #aaa;
-}
-
-.title:hover {
   cursor: pointer;
 }
 
 .tile.red {
   border: 1px solid red;
+}
+
+.scene-tile-wrapper {
+  width: 50000px;
+}
+
+.scene-tile-wrapper .tile {
+  margin: 0;
+  float:left;
+}
+
+.tab-content {
+  overflow: auto;
 }

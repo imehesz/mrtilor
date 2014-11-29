@@ -4,12 +4,36 @@ webApp.controller("MainController", function($scope, $sce){
   $scope.appName = "Mr. Tilor";
   
   $scope.tileSettings = {
-    tilesFile: "http://mehesz.net/cicus/images/tiles.png",
+    tilesFile: "https://692ce8af1eca91e4dbe0dbf589c10ab67a3e1418.googledrive.com/host/0B55OYxnBow_9REZFVFRRM3E5REE/girls-n-cowboys-tiles.png",
     tileSize: 32,
     tileCnt: 0,
     defaultTile: 0,
     tiles: []
   };
+  
+  $scope.sceneSettings = {
+    cols: 1,
+    rows: 1,
+    getRows: function() {
+      var retArr = [];
+      
+      for(var i=0; i<$scope.sceneSettings.rows; i++) {
+        retArr.push(i);
+      }
+      
+      return retArr;
+    },
+    
+    getCols: function() {
+      var retArr = [];
+      
+      for(var i=0; i<$scope.sceneSettings.cols; i++) {
+        retArr.push(i);
+      }
+      
+      return retArr;
+    }
+  }
   
   var tileFile = null;
   var tileFileWidth = 0;
@@ -22,7 +46,7 @@ webApp.controller("MainController", function($scope, $sce){
     if(!tileFile) {
       tileFile = new Image();
       tileFile.onload = function() {
-        $img = $(tileFile);
+        var $img = $(tileFile);
         $("body").append($img);
         tileFileWidth = $img.width();
         $img.remove();
@@ -37,14 +61,19 @@ webApp.controller("MainController", function($scope, $sce){
   var updateTilesImage = function() {
     getTilesImageWidth(function(){
       console.log("hereee");
+      
+      var TILE_WRAPPER_CLASS = ".tile-wrapper";
+      var TILE_CLASS = ".tile";
+      
       $scope.tileSettings.tileCnt = tileFileWidth/$scope.tileSettings.tileSize;
       
       var styleStr = "<style>";
       
-      styleStr += ".tile-wrapper .tile {width:"+$scope.tileSettings.tileSize+"px; height:" + $scope.tileSettings.tileSize + "px;}";
+      styleStr += TILE_WRAPPER_CLASS + " " + TILE_CLASS + " {width:"+$scope.tileSettings.tileSize+"px; height:" + $scope.tileSettings.tileSize + "px;}\n";
       
       for(var i=0; i<$scope.tileSettings.tileCnt;i++) {
         $scope.tileSettings.tiles.push(i);
+        styleStr += TILE_WRAPPER_CLASS + " " + TILE_CLASS + TILE_CLASS + "-" + i + " {background-image: url(" + $scope.tileSettings.tilesFile + ");background-position: " + (tileFileWidth-(i*$scope.tileSettings.tileSize)-1) + "px 0;}\n";
       }
       
       styleStr += "</style>";

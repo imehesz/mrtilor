@@ -65,16 +65,25 @@
 					<div class="tab-pane active" id="panel-792227">
 						<p>
 							I'm in Section 1.
+							<div class="tile-wrapper scene-tile-wrapper">
+								<span ng-repeat="tileY in sceneSettings.getRows()">
+									<span ng-repeat="tileX in sceneSettings.getCols()">
+										<div id="scene-tile-{{tileY}}-{{tileX}}" ng-click="sceneSettings.setTileToDefault(tileY,tileX)" class="tile tile-0"></div>
+									</span>
+									<div style="clear:both;"></div>
+								</span>
+							</div>
 						</p>
 						<hr>
 						<p ng-show="tileSettings.tilesFile">
+							<h3>Available Tiles</h3>
 							<div ng-bind-html="tileSettings.styleStr">
 								{{tileSettings.styleStr}}
 							</div>
 							<div class="tile-wrapper">
 								<span ng-repeat="tile in tileSettings.tiles"><div ng-click="setDefaultTile($index)" ng-class="$index==tileSettings.defaultTile && 'red'" class="tile tile-{{$index}}"></div></span>
 							</div>
-							<img ng-src="{{tileSettings.tilesFile}}">
+							<!-- FOR TESTING <img ng-src="{{tileSettings.tilesFile}}"> -->
 						</p>
 					</div>
 					<div class="tab-pane" id="panel-401263">
@@ -86,9 +95,9 @@
 			</div>
 		</div>
 		<div class="col-md-2 column">
-			<h3 class="text-left text-primary">
-				Settings
-			</h3>
+			<h4 class="text-left text-primary">
+				Tile Settings
+			</h4>
 			<form role="form">
 				<div class="form-group">
 					 <label for="tilesFile">Tiles File</label><input title="{{tileSettings.tilesFile}}" ng-model="tileSettings.tilesFile" type="text" class="form-control" id="tilesFile">
@@ -100,7 +109,15 @@
 					 <label for="tileSize">Tile Count:</label> {{tileSettings.tileCnt}}
 				</div>
 			</form>
-			<hr>
+			<h4 class="text-left text-primary">
+				Scene Settings
+			</h4>
+			<div class="form-group">
+				<label for="sceneCols">Cols</label><input title="{{sceneSettings.cols}}" ng-model="sceneSettings.cols" type="number" class="form-control" id="sceneCols">
+			</div>
+			<div class="form-group">
+				<label for="sceneRows">Rows</label><input title="{{sceneSettings.rows}}" ng-model="sceneSettings.rows" type="number" class="form-control" id="sceneRows">
+			</div>
 		</div>
 	</div>
 </div>
