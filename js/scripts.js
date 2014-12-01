@@ -89,6 +89,14 @@ webApp.controller("MainController", function($scope, $sce){
     }
   });
   
+  $scope.$watch("sceneSettings.cols", function(n,o) {
+    if (n!==o) {
+      if (n && $.isNumeric(n)) {
+        $(".scene-tile-wrapper").width((n*($scope.tileSettings.tileSize)));        
+      }
+    }
+  });
+  
   $scope.setDefaultTile = function(idx) {
     console.log("setting default tile!", idx);
     $scope.tileSettings.defaultTile = idx;

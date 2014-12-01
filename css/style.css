@@ -9,10 +9,6 @@
   border: 1px solid red;
 }
 
-.scene-tile-wrapper {
-  width: 50000px;
-}
-
 .scene-tile-wrapper .tile {
   margin: 0;
   float:left;
