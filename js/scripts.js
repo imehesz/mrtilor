@@ -14,6 +14,7 @@ webApp.controller("MainController", function($scope, $sce){
   $scope.sceneSettings = {
     cols: 1,
     rows: 1,
+    tiles: [],
     getRows: function() {
       var retArr = [];
       
@@ -32,6 +33,14 @@ webApp.controller("MainController", function($scope, $sce){
       }
       
       return retArr;
+    },
+    
+    setTileToDefault: function(x,y) {
+      $scope.sceneSettings.tiles.push({coords: {x:x, y:y}, tileIdx:$scope.tileSettings.defaultTile});
+      $("#scene-tile-" + x + "-" + y).
+        attr("class", "tile tile-" + $scope.tileSettings.defaultTile);
+      
+      console.log($scope.sceneSettings.tiles);
     }
   }
   

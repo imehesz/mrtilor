@@ -68,7 +68,7 @@
 							<div class="tile-wrapper scene-tile-wrapper">
 								<span ng-repeat="tileY in sceneSettings.getRows()">
 									<span ng-repeat="tileX in sceneSettings.getCols()">
-										<div id="scene-tile-{{tileY}}-{{tileX}}" ng-click="sceneSettings.setTileToDefault(tileY,tileX)" class="tile tile-0"></div>
+										<div id="scene-tile-{{tileX}}-{{tileY}}" ng-click="sceneSettings.setTileToDefault(tileX,tileY)" class="tile tile-0"></div>
 									</span>
 									<div style="clear:both;"></div>
 								</span>
