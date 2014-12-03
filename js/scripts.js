@@ -41,6 +41,21 @@ webApp.controller("MainController", function($scope, $sce){
         attr("class", "tile tile-" + $scope.tileSettings.defaultTile);
       
       console.log($scope.sceneSettings.tiles);
+    },
+    
+    reloadTiles: function() {
+      if ($scope.sceneSettings.tiles.length) {
+        $scope.sceneSettings.tiles.forEach(function(tile){
+          for(var x=0; x<$scope.sceneSettings.cols;x++) {
+            for(var y=0; y<$scope.sceneSettings.rows;y++) {
+              if(x==tile.coords.x && y==tile.coords.y) {
+                $("#scene-tile-" + x + "-" + y).
+                  attr("class", "tile tile-" + tile.tileIdx);
+              }
+            }
+          }
+        });
+      }
     }
   }
   
@@ -103,6 +118,14 @@ webApp.controller("MainController", function($scope, $sce){
       if (n && $.isNumeric(n)) {
         $(".scene-tile-wrapper").width((n*($scope.tileSettings.tileSize)));        
       }
+      
+      setTimeout($scope.sceneSettings.reloadTiles, 0);
+    }
+  });
+  
+  $scope.$watch("sceneSettings.rows", function(n,o) {
+    if (n!==o) {
+      setTimeout($scope.sceneSettings.reloadTiles, 0);
     }
   });
   
