@@ -11,6 +11,49 @@ webApp.controller("MainController", function($scope, $sce){
     tiles: []
   };
   
+  $scope.tileArray = {
+    strOut: "",
+    importSceneInfo: function() {
+      var importStr = $scope.tileArray.strOut;
+      
+      try{
+        var importArr = eval(importStr);
+      } catch(e) {
+        console.log(e);
+      }
+      
+      if ($.isArray(importArr) && importArr.length > 0) {
+        var rows = importArr.length;
+        var cols = importArr[0].length;
+        
+        if(rows && cols) {
+          $scope.sceneSettings.tiles = [];
+          for(var x = 0; x<cols; x++) {
+            for(var y = 0; y<rows; y++) {
+              if (typeof importArr[y] != "undefined" && typeof importArr[y][x] != "undefined") {
+                // TODO check what happens if we ignore index `0`
+                var tileIdx = importArr[y][x];
+                
+                // we fill up the sceneSettings with the newly collected data
+                $scope.sceneSettings.tiles.push({coords: {x:x, y:y}, tileIdx: tileIdx});
+              }
+            }
+          }
+          
+          // if we got the tiles, we update the rows and cols
+          if ($scope.sceneSettings.tiles.length) {
+            $scope.sceneSettings.rows = rows;
+            $scope.sceneSettings.cols = cols;
+          }
+        }
+        
+      } else {
+        alert("Oops! You shall not pass!");
+        console.log("ERR: something went wrong", importArr);
+      }
+    }
+  }
+  
   $scope.sceneSettings = {
     cols: 1,
     rows: 1,
