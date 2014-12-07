@@ -55,10 +55,10 @@
 			<div class="tabbable" id="tabs-522448">
 				<ul class="nav nav-tabs">
 					<li class="active">
-						<a href="#panel-editor" data-toggle="tab">Tile Map Editor</a>
+						<a href="#panel-editor" data-toggle="tab">Scene Editor</a>
 					</li>
 					<li>
-						<a href="#panel-array" data-toggle="tab">Tile Array</a>
+						<a href="#panel-array" data-toggle="tab">Scene Code</a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -85,10 +85,7 @@
 							<!-- FOR TESTING <img ng-src="{{tileSettings.tilesFile}}"> -->
 							<h3>Convert</h3>
 							<div>
-								Click the button to convert the tiles to the tile array format: 
-							</div>
-							<div>
-								<button class="btn btn-primary">Converting Button</button>
+								Click the button to convert the tiles to the tile array format: <button class="btn btn-primary" ng-click="tileArray.exportSceneInfo()">Export Scene</button>
 							</div>
 						</p>
 					</div>
@@ -99,7 +96,7 @@
 						<hr>
 						<h3>Import</h3>
 						<div>
-							Click the button to import tile array to Tile Map Editor: <button ng-click="tileArray.importSceneInfo()" class="btn btn-primary">Importing Button</button>
+							Click the button to import tile array to Tile Map Editor: <button ng-click="tileArray.importSceneInfo()" class="btn btn-primary">Import Scene</button>
 						</div>
 					</div>
 				</div>

@@ -13,6 +13,27 @@ webApp.controller("MainController", function($scope, $sce){
   
   $scope.tileArray = {
     strOut: "",
+    exportSceneInfo: function() {
+      var jsonArr = [];
+      if ($scope.sceneSettings.cols>0 && $scope.sceneSettings.rows>0) {
+        for(var x=0; x<$scope.sceneSettings.rows;x++) {
+          var rowArr = [];
+          for(var y=0; y<$scope.sceneSettings.cols;y++) {
+            var tileIdx = 0;
+            
+            $scope.sceneSettings.tiles.forEach(function(tile){
+              if(x==tile.coords.y && y==tile.coords.x) {
+                tileIdx = tile.tileIdx;
+              }
+            });
+            rowArr.push(tileIdx);
+          }
+          jsonArr.push(rowArr);
+        }
+      }
+      $scope.tileArray.strOut = JSON.stringify(jsonArr);
+      alert("Scene Exported!");
+    },
     importSceneInfo: function() {
       var importStr = $scope.tileArray.strOut;
       
@@ -46,6 +67,8 @@ webApp.controller("MainController", function($scope, $sce){
             $scope.sceneSettings.cols = cols;
           }
         }
+        
+        alert("Scene Imported!");
         
       } else {
         alert("Oops! You shall not pass!");
