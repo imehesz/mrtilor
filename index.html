@@ -116,6 +116,10 @@
 				<div class="form-group">
 					 <label for="tileSize">Tile Count:</label> {{tileSettings.tileCnt}}
 				</div>
+				
+				<div class="form-group">
+					 <button ng-click="updateTileInfo()">Update Tile Info</button>
+				</div>
 			</form>
 			<h4 class="text-left text-primary">
 				Scene Settings
@@ -125,6 +129,10 @@
 			</div>
 			<div class="form-group">
 				<label for="sceneRows">Rows</label><input title="{{sceneSettings.rows}}" ng-model="sceneSettings.rows" type="number" class="form-control" id="sceneRows">
+			</div>
+			<h4 class="text-left text-primary">Examples</h4>
+			<div>
+				<div ng-repeat="example in examples"><a href="javascript:void(0);" ng-click="updateTileInfo(example)">{{example.label}}</a></div>
 			</div>
 		</div>
 	</div>

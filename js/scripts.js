@@ -3,9 +3,24 @@ var webApp = angular.module("webApp",[]);
 webApp.controller("MainController", function($scope, $sce){
   $scope.appName = "Mr. Tilor";
   
+  $scope.examples = {
+    smallTiles: {
+      name: "smallTiles",
+      label: "Example 1",
+      tileSize: 32,
+      tileSheet: "https://692ce8af1eca91e4dbe0dbf589c10ab67a3e1418.googledrive.com/host/0B55OYxnBow_9REZFVFRRM3E5REE/girls-n-cowboys-tiles.png"
+    },
+    bigTiles: {
+      name: "bigTiles",
+      label: "Example 2",
+      tileSize: 70,
+      tileSheet: "https://7ad1f94f624a2f6c1c092d68077cd24a0c620ce5.googledrive.com/host/0B55OYxnBow_9U2tsYmxoQTl6clk/tilesheet.png"
+    }
+  };
+  
   $scope.tileSettings = {
-    tilesFile: "https://692ce8af1eca91e4dbe0dbf589c10ab67a3e1418.googledrive.com/host/0B55OYxnBow_9REZFVFRRM3E5REE/girls-n-cowboys-tiles.png",
-    tileSize: 32,
+    tilesFile: $scope.examples.smallTiles.tileSheet,
+    tileSize: $scope.examples.smallTiles.tileSize,
     tileCnt: 0,
     defaultTile: 0,
     tiles: []
@@ -169,9 +184,26 @@ webApp.controller("MainController", function($scope, $sce){
       styleStr += "</style>";
       
       $scope.tileSettings.styleStr = $sce.trustAsHtml(styleStr);
+      
       $scope.$apply();
     });
   }
+  
+  $scope.updateTileInfo = function(tileObj) {
+    if (typeof tileObj != "undefined") {
+      $scope.tileSettings = {
+        tilesFile: tileObj.tileSheet,
+        tileSize: tileObj.tileSize,
+        tileCnt: 0,
+        defaultTile: 0,
+        tiles: []
+      };
+      
+      updateTilesImage();
+    } else {
+      init();
+    }
+  };
   
   $scope.$watch("tileSettings.tilesFile", function(n,o) {
     if (n!==o) {
