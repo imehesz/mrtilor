@@ -48,8 +48,9 @@ webApp.controller("MainController", function($scope, $sce){
           jsonArr.push(rowArr);
         }
       }
+      
       $scope.tileArray.strOut = JSON.stringify(jsonArr);
-      alert("Scene Exported!");
+      swal("Success!", "Scene Exported.", "success");
     },
     importSceneInfo: function() {
       var importStr = $scope.tileArray.strOut;
@@ -85,7 +86,7 @@ webApp.controller("MainController", function($scope, $sce){
           }
         }
         
-        alert("Scene Imported!");
+        swal("Success!", "Scene Imported.", "success");
         
       } else {
         alert("Oops! You shall not pass!");
