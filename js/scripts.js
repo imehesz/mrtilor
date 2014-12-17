@@ -6,15 +6,17 @@ webApp.controller("MainController", function($scope, $sce){
   $scope.examples = {
     smallTiles: {
       name: "smallTiles",
-      label: "Example 1",
+      label: "Smaller Tiles (32)",
       tileSize: 32,
-      tileSheet: "https://692ce8af1eca91e4dbe0dbf589c10ab67a3e1418.googledrive.com/host/0B55OYxnBow_9REZFVFRRM3E5REE/girls-n-cowboys-tiles.png"
+      tileSheet: "https://692ce8af1eca91e4dbe0dbf589c10ab67a3e1418.googledrive.com/host/0B55OYxnBow_9REZFVFRRM3E5REE/girls-n-cowboys-tiles.png",
+      sceneStr: "[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],[3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],[1,3,3,3,3,3,3,0,0,0,3,3,3,3,0,0,0,3,3,1],[1,3,3,3,1,1,3,3,3,3,1,1,1,1,3,3,3,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]"
     },
     bigTiles: {
       name: "bigTiles",
-      label: "Example 2",
+      label: "Bigger Tiles (70)",
       tileSize: 70,
-      tileSheet: "https://7ad1f94f624a2f6c1c092d68077cd24a0c620ce5.googledrive.com/host/0B55OYxnBow_9U2tsYmxoQTl6clk/tilesheet.png"
+      tileSheet: "https://7ad1f94f624a2f6c1c092d68077cd24a0c620ce5.googledrive.com/host/0B55OYxnBow_9U2tsYmxoQTl6clk/tilesheet.png",
+      sceneStr: "[[0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,6],[4,0,2,0,0,0,0,0,0,3],[3,3,3,3,0,0,0,3,3,1],[1,1,13,13,15,15,15,13,1,1]]"
     }
   };
   
@@ -165,7 +167,6 @@ webApp.controller("MainController", function($scope, $sce){
   
   var updateTilesImage = function() {
     getTilesImageWidth(function(){
-      console.log("hereee");
       
       var TILE_WRAPPER_CLASS = ".tile-wrapper";
       var TILE_CLASS = ".tile";
@@ -199,17 +200,14 @@ webApp.controller("MainController", function($scope, $sce){
         tiles: []
       };
       
+      $scope.tileArray.strOut = tileObj.sceneStr;
+      
       updateTilesImage();
+      $scope.tileArray.importSceneInfo();
     } else {
       init();
     }
   };
-  
-  $scope.$watch("tileSettings.tilesFile", function(n,o) {
-    if (n!==o) {
-      console.log("tilesFile", n);
-    }
-  });
   
   $scope.$watch("sceneSettings.cols", function(n,o) {
     if (n!==o) {
